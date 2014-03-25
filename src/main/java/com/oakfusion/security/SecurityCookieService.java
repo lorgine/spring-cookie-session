@@ -1,4 +1,4 @@
-package pl.oakfusion.security;
+package com.oakfusion.security;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.core.Authentication;

@@ -1,4 +1,4 @@
-package pl.oakfusion.security;
+package com.oakfusion.security;
 
 
 public interface Codec {

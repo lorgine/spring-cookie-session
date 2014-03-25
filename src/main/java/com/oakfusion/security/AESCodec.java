@@ -1,4 +1,4 @@
-package pl.oakfusion.security;
+package com.oakfusion.security;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
