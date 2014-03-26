@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 public class SecurityCookieService {
 
 	private final String cookieName;
+	private final String cookiePath;
 	private final Codec codec;
 	private final AuthenticationSerializer serializer;
 
-	public SecurityCookieService(String cookieName, String key) {
+	public SecurityCookieService(String cookieName, String key, String cookiePath) {
 		this.cookieName = cookieName;
+		this.cookiePath = cookiePath;
 		this.codec = new AESCodec(key);
 		this.serializer = new AuthenticationSerializer();
 	}
@@ -32,7 +34,7 @@ public class SecurityCookieService {
 
 		String value = new String(encodedWithBase64);
 		Cookie c = new Cookie(cookieName, value);
-		c.setPath("/");
+		c.setPath(cookiePath);
 
 		return c;
 	}
@@ -52,7 +54,7 @@ public class SecurityCookieService {
 
 	public Cookie createLogoutCookie() {
 		Cookie c = new Cookie(cookieName, "");
-		c.setPath("/");
+		c.setPath(cookiePath);
 		c.setMaxAge(0);
 		return c;
 	}
