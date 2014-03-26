@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SecurityCookieService {
 
+	private static final String DEFAULT_COOKIE_PATH = "/";
 	private final String cookieName;
 	private final String cookiePath;
 	private final Codec codec;
@@ -16,6 +17,13 @@ public class SecurityCookieService {
 	public SecurityCookieService(String cookieName, String key, String cookiePath) {
 		this.cookieName = cookieName;
 		this.cookiePath = cookiePath;
+		this.codec = new AESCodec(key);
+		this.serializer = new AuthenticationSerializer();
+	}
+
+	public SecurityCookieService(String cookieName, String key) {
+		this.cookieName = cookieName;
+		this.cookiePath = DEFAULT_COOKIE_PATH;
 		this.codec = new AESCodec(key);
 		this.serializer = new AuthenticationSerializer();
 	}
