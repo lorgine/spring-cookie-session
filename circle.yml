@@ -1,9 +1,8 @@
 machine:
-  environment:
-    - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o env_vars.sh https://s3-eu-west-1.amazonaws.com/mvn-settings/env_vars.sh
-    - chmod 755 env_vars.sh
-    - source env_vars.sh
-    - echo $SONAR_HOST_URL
+  - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o env_vars.sh https://s3-eu-west-1.amazonaws.com/mvn-settings/env_vars.sh
+  - chmod 755 env_vars.sh
+  - source env_vars.sh
+  - echo $SONAR_HOST_URL
 deployment:
   staging:
     branch: master
