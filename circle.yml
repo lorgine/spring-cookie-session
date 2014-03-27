@@ -5,9 +5,15 @@ deployment:
       - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o settings.xml https://s3-eu-west-1.amazonaws.com/mvn-settings/settings.xml
       - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o secring.gpg https://s3-eu-west-1.amazonaws.com/mvn-settings/secring.gpg
       - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o pubring.gpg https://s3-eu-west-1.amazonaws.com/mvn-settings/pubring.gpg
+      - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o env_vars.sh https://s3-eu-west-1.amazonaws.com/mvn-settings/env_vars.sh
       - rm s3curl.pl
+      - chmod 755 env_vars.sh
+      - source env_vars.sh
       - mkdir -p /home/ubuntu/.gnupg
       - mv secring.gpg /home/ubuntu/.gnupg/
       - mv pubring.gpg /home/ubuntu/.gnupg/
       - mvn release:clean --settings ./settings.xml --global-settings ./settings.xml
       - mvn release:perform -DconnectionUrl=$SCS_SCM --settings ./settings.xml --global-settings ./settings.xml
+      - mvn clean install -DskipTests=true
+      - mvn sonar:sonar -Dsonar.jdbc.url=$SONAR_JDBC_URL -Dsonar.jdbc.username=$SONAR_JDBC_USER -Dsonar.jdbc.password=$SONAR_JDBC_PASSWORD -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWORD:
+          timeout: 1800
