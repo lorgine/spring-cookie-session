@@ -1,0 +1,13 @@
+deployment:
+  staging:
+    branch: master
+    commands:
+      - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o settings.xml https://s3-eu-west-1.amazonaws.com/mvn-settings/settings.xml
+      - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o secring.gpg https://s3-eu-west-1.amazonaws.com/mvn-settings/secring.gpg
+      - ./s3curl.pl --id=$S3_ID --key=$S3_KEY -- --o pubring.gpg https://s3-eu-west-1.amazonaws.com/mvn-settings/pubring.gpg
+      - rm s3curl.pl
+      - mkdir -p /home/ubuntu/.gnupg
+      - mv secring.gpg /home/ubuntu/.gnupg/
+      - mv pubring.gpg /home/ubuntu/.gnupg/
+      - mvn release:clean --settings ./settings.xml --global-settings ./settings.xml
+      - mvn release:perform -DconnectionUrl=$SCS_SCM --settings ./settings.xml --global-settings ./settings.xml
