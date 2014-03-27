@@ -15,5 +15,6 @@ deployment:
       - mvn release:clean --settings ./settings.xml --global-settings ./settings.xml
       - mvn release:perform -DconnectionUrl=$SCS_SCM --settings ./settings.xml --global-settings ./settings.xml
       - mvn clean install -DskipTests=true
+      - echo $SONAR_HOST_URL
       - mvn sonar:sonar -Dsonar.jdbc.url=$SONAR_JDBC_URL -Dsonar.jdbc.username=$SONAR_JDBC_USER -Dsonar.jdbc.password=$SONAR_JDBC_PASSWORD -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWORD:
           timeout: 1800
