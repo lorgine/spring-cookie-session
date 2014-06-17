@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 public class SecurityCookieService {
 
@@ -40,7 +41,7 @@ public class SecurityCookieService {
 		byte[] encryptedAuthentication = codec.encrypt(serializedAuthentication);
 		byte[] encodedWithBase64 = Base64.encodeBase64URLSafe(encryptedAuthentication);
 
-		String value = new String(encodedWithBase64);
+		String value = Arrays.toString(encodedWithBase64);
 		Cookie c = new Cookie(cookieName, value);
 		c.setPath(cookiePath);
 
