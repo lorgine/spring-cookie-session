@@ -5,7 +5,7 @@
 	<artifactId>spring-cookie-session</artifactId>
 	<packaging>jar</packaging>
 	<name>spring-cookie-session</name>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<description>Implementation of SecurityContextRepository which allows to store authentication in cookie</description>
 
 	<url>https://github.com/oakfusion/spring-cookie-session</url>
