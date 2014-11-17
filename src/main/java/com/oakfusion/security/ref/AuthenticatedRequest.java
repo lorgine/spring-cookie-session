@@ -40,4 +40,8 @@ public class AuthenticatedRequest {
 
 		return null;
 	}
+
+	public boolean containsAuthentication() {
+		return false;
+	}
 }
