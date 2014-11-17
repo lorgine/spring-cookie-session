@@ -1,4 +1,4 @@
-package com.oakfusion.security.ref;
+package com.oakfusion.security.repo;
 
 public class AuthCookieConfig {
 

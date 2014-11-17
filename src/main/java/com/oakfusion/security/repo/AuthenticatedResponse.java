@@ -1,4 +1,4 @@
-package com.oakfusion.security.ref;
+package com.oakfusion.security.repo;
 
 import com.oakfusion.security.cookie.CookieBaker;
 import com.oakfusion.security.serial.AuthSerializer;
