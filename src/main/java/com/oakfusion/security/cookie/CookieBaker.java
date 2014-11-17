@@ -1,4 +1,4 @@
-package com.oakfusion.security.ref;
+package com.oakfusion.security.cookie;
 
 import javax.servlet.http.Cookie;
 

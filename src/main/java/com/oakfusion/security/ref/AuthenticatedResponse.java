@@ -1,5 +1,6 @@
 package com.oakfusion.security.ref;
 
+import com.oakfusion.security.cookie.CookieBaker;
 import com.oakfusion.security.serial.AuthSerializer;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.context.SaveContextOnUpdateOrErrorResponseWrapper;
