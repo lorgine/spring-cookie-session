@@ -1,12 +1,12 @@
-package com.oakfusion.security;
+package com.oakfusion.security.serial;
 
 import org.springframework.security.core.Authentication;
 
 import java.io.*;
 
-public class AuthenticationSerializer {
+public class JavaAuthSerializer implements AuthSerializer {
 
-	public byte[] serializeToByteArray(final Authentication object) {
+	public byte[] write(final Authentication object) {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		try (ObjectOutput outputStream = new ObjectOutputStream(byteArrayOutputStream)) {
 			outputStream.writeObject(object);
@@ -16,7 +16,7 @@ public class AuthenticationSerializer {
 		}
 	}
 
-	public Authentication deserializeFrom(final byte[] bytes) {
+	public Authentication read(final byte[] bytes) {
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 		try (ObjectInputStream inputStream = new ObjectInputStream(byteArrayInputStream)) {
 			return (Authentication) inputStream.readObject();
