@@ -1,5 +1,7 @@
 package com.oakfusion.security;
 
+import com.oakfusion.security.crypto.AESCodec;
+import com.oakfusion.security.crypto.Codec;
 import com.oakfusion.security.serial.JavaAuthSerializer;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.core.Authentication;
