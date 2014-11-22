@@ -31,10 +31,9 @@ final class AuthenticatedResponse extends SaveContextOnUpdateOrErrorResponseWrap
 	protected void saveContext(SecurityContext context) {
 		if (!this.isContextSaved()) {
 			addCookie(
-					new CookieBaker(serializer.write(context.getAuthentication()))
+					new CookieBaker(serializer.write(context.getAuthentication()), config.getCookieName())
 						.withPath(config.getCookiePath())
-						.withName(config.getCookieName())
-						.expires(CookieBaker.ExpirationBuilder.never())
+						.expires(config.getCookieExpiresInSeconds())
 						.httpOnly()
 						.secure()
 						.bake()
