@@ -1,5 +1,8 @@
 package com.oakfusion.security;
 
+import com.oakfusion.security.crypto.AESCodec;
+import com.oakfusion.security.crypto.Codec;
+import com.oakfusion.security.serial.JavaAuthSerializer;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.core.Authentication;
 
@@ -12,31 +15,31 @@ public class SecurityCookieService {
 	private final String cookieName;
 	private final String cookiePath;
 	private final Codec codec;
-	private final AuthenticationSerializer serializer;
+	private final JavaAuthSerializer serializer;
 
 	public SecurityCookieService(String cookieName, String key, String cookiePath) {
 		this.cookieName = cookieName;
 		this.cookiePath = cookiePath;
 		this.codec = new AESCodec(key);
-		this.serializer = new AuthenticationSerializer();
+		this.serializer = new JavaAuthSerializer();
 	}
 
 	public SecurityCookieService(String cookieName, String key) {
 		this.cookieName = cookieName;
 		this.cookiePath = DEFAULT_COOKIE_PATH;
 		this.codec = new AESCodec(key);
-		this.serializer = new AuthenticationSerializer();
+		this.serializer = new JavaAuthSerializer();
 	}
 
 	public Authentication getAuthenticationFrom(Cookie cookie) {
 		byte[] decodedFromBase64 = Base64.decodeBase64(cookie.getValue());
 		byte[] decryptedAuthentication = codec.decrypt(decodedFromBase64);
 
-		return serializer.deserializeFrom(decryptedAuthentication);
+		return serializer.read(decryptedAuthentication);
 	}
 
 	public Cookie createSecurityCookie(Authentication auth) {
-		byte[] serializedAuthentication = serializer.serializeToByteArray(auth);
+		byte[] serializedAuthentication = serializer.write(auth);
 		byte[] encryptedAuthentication = codec.encrypt(serializedAuthentication);
 		String encodedWithBase64 = Base64.encodeBase64URLSafeString(encryptedAuthentication);
 

@@ -1,4 +1,4 @@
-package com.oakfusion.security;
+package com.oakfusion.security.crypto;
 
 
 public interface Codec {
